@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite verbose="5" name="HappyO_iOS_tests">
+    <listeners>
+        <listener class-name="utils.ListenerTest"/>
+    </listeners>
+    <test name="HappyO_tests">
+        <packages>
+            <package name="tests.RegistrationTests">
+                <include name="Registration">
+                    <classes>
+                        <class name="tests.GameCreationTests"/>
+                        <class name="tests.InviteToGameTests"/>
+                        <class name="tests.RegistrationTests"/>
+                        <class name="tests.AuthorizationTests"/>
+                    </classes>
+                </include>
+            </package>
+        </packages>
+    </test>
+</suite>
