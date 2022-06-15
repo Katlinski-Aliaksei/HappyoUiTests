@@ -4,6 +4,7 @@ import base.BaseMobilePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 public class ProfilePage extends BaseMobilePage {
@@ -41,6 +42,12 @@ public class ProfilePage extends BaseMobilePage {
     protected MobileElement arrowButton;
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Invitations sent\"`]")
     protected MobileElement textNotification;
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`label == \"Save video\"`]")
+    protected MobileElement saveVideoButton;
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Save to Files\"`]")
+    protected MobileElement saveToFilesButton;
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Сохранить\"`]")
+    protected MobileElement confirmSaveButton;
 
     //TODO refactoring locator
     @iOSXCUITFindBy(xpath = "(//XCUIElementTypeOther[@name=\"Created Completed\"])[1]" +
@@ -56,11 +63,27 @@ public class ProfilePage extends BaseMobilePage {
             "/following::XCUIElementTypeOther[1]")
     protected MobileElement backButton;
 
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeNavigationBar[@name=\"UIActivityContentView\"]/XCUIElementTypeOther/child::XCUIElementTypeOther")
+    protected MobileElement previewVideoLink;
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Close\"`]")
+    protected MobileElement closeToolWindow;
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCell[`label == \"Messages\"`]")
+    protected MobileElement messagesButton;
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCell[`label == \"Telegram\"`]/XCUIElementTypeOther/XCUIElementTypeOther[2]")
+    protected MobileElement telegramButton;
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Save to Files\"`]")
+    protected MobileElement saveToFileLinkButton;
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeTextField[@name=\"messageBodyField\"]")
+    protected MobileElement messageBodyField;
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Отменить\"`]")
+    protected MobileElement cancelButton;
+
 
     public ProfilePage(AppiumDriver<MobileElement> driver) {
         super(driver);
     }
 
+    @Step("Click Settings Profile Button")
     public ProfilePage openProfileSettings() {
         waiters.waitSomeSecond(3);
         element(settingsProfileButton).clickElement();
@@ -68,6 +91,7 @@ public class ProfilePage extends BaseMobilePage {
         return this;
     }
 
+    @Step("Click LogOut Button")
     public ProfilePage clickLogOutButton() {
         waiters.waitSomeSecond(2);
         element(logOutButton).clickElement();
@@ -75,34 +99,40 @@ public class ProfilePage extends BaseMobilePage {
         return this;
     }
 
+    @Step("Click Yes Button")
     public ProfilePage clickYesButton() {
         element(yesButton).clickElement();
 
         return this;
     }
 
+    @Step("Settings Profile Button Visibility Check")
     public boolean profileTestAccountIsVisible() {
         return element(settingsProfileButton).isDisplayed();
     }
 
+    @Step("Click Created Button")
     public ProfilePage clickCreatedButton() {
         element(createdButton).clickElement();
 
         return this;
     }
 
+    @Step("Click Completed Button")
     public ProfilePage clickCompletedButton() {
         element(completedButton).clickElement();
 
         return this;
     }
 
+    @Step("Click Confirm Button")
     public ProfilePage clickConfirmButton() {
         element(confirmButton).clickElement();
 
         return this;
     }
 
+    @Step("Click Confirm Button")
     public ProfilePage clickConfirmInSettingsButton() {
         element(confirmInSettingsButton).clickElement();
 
@@ -115,30 +145,38 @@ public class ProfilePage extends BaseMobilePage {
         return this;
     }
 
+    @Step("Click Delete Competition Button")
     public ProfilePage clickDeleteCompetitionButton() {
         element(deleteMyCompetitionButton).clickElement();
 
         return this;
     }
 
+    @Step("Tap on Video")
     public ProfilePage clickVideo() {
-        element(video).clickElement();
-
+        try {
+            element(video).clickElement();
+        } catch (Exception e) {
+            System.out.println("Video isn't visible");
+        }
         return this;
     }
 
+    @Step("Click Settings Created Video Button")
     public ProfilePage clickSettingsCreatedVideoButton() {
         element(settingsCreatedVideoButton).clickElement();
 
         return this;
     }
 
+    @Step("Click Settings Completed Video Button")
     public ProfilePage clickSettingsCompletedVideoButton() {
         element(settingsCompletedVideoButton).clickElement();
 
         return this;
     }
 
+    @Step("Click Back Button")
     public ProfilePage clickBackButton() {
         try {
             element(backButton).clickElement();
@@ -149,6 +187,7 @@ public class ProfilePage extends BaseMobilePage {
         return this;
     }
 
+    @Step("New Test Video Visibility Check")
     public boolean testVideoIsVisible() {
         element().refreshPage();
         waiters.waitSomeSecond(3);
@@ -156,24 +195,33 @@ public class ProfilePage extends BaseMobilePage {
         return element(video).isDisplayed();
     }
 
+    @Step("Click Arrow Button")
     public ProfilePage clickArrowButton() {
         element(arrowButton).clickElement();
 
         return this;
     }
 
+    @Step("Arrow Button Visibility Check")
+    public boolean arrowButtonIsVisible() {
+        return element(arrowButton).isDisplayed();
+    }
+
+    @Step("Click Invite To A Game Button")
     public ProfilePage clickInviteToGameButton() {
         element(inviteToGameButton).clickElement();
 
         return this;
     }
 
+    @Step("Click Invite To A Game Button in Settings")
     public ProfilePage clickInviteToGameInSettingsButton() {
         element(inviteToGameInSettingsButton).clickElement();
 
         return this;
     }
 
+    @Step("Choose User from List To Invite To A Game")
     public ProfilePage selectUserToInviteToGame(String name) {
         String value = replaceUserName.replace("replace", name);
         element(By.xpath(value)).clickElement();
@@ -182,7 +230,67 @@ public class ProfilePage extends BaseMobilePage {
         return this;
     }
 
+    @Step("Notification after Sending Invite To A Game Visibility Checking")
     public boolean notificationIsVisible() {
         return element(textNotification).isDisplayed();
+    }
+
+    @Step("Click Share Button")
+    public ProfilePage clickShareLinkButton() {
+        element(shareLinkButton).clickElement();
+
+        return this;
+    }
+
+    @Step("Choose Messages Tool for Sharing Game")
+    public ProfilePage chooseMessageTool() {
+        element(messagesButton).clickElement();
+
+        return this;
+    }
+
+    @Step("Preview Link Video Visibility Check")
+    public boolean previewVideoLinkIsVisible() {
+        return element(previewVideoLink).isDisplayed();
+    }
+
+    @Step("Text message contains Link Check")
+    public String textMessageContainsVideoLink() {
+        return element(messageBodyField).getText();
+    }
+
+    @Step("Click Close Tool Window Button")
+    public ProfilePage clickCloseToolWindow() {
+        element(closeToolWindow).clickElement();
+
+        return this;
+    }
+
+    @Step("Click Cancel Button")
+    public ProfilePage clickCancelButton() {
+        element(cancelButton).clickElement();
+
+        return this;
+    }
+
+    @Step("click Save Button")
+    public ProfilePage clickSaveVideoButton() {
+        element(saveVideoButton).clickElement();
+
+        return this;
+    }
+
+    @Step("Click save To files Button")
+    public ProfilePage clickSaveToFilesButton() {
+        element(saveToFilesButton).clickElement();
+
+        return this;
+    }
+
+    @Step("Click confirm Save Button")
+    public ProfilePage clickConfirmSaveButton() {
+        element(confirmSaveButton).clickElement();
+
+        return this;
     }
 }

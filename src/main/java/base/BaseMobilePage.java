@@ -10,17 +10,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.Waiters;
 
+import java.time.Duration;
+
 
 public class BaseMobilePage {
     protected static final Logger LOGGER = LoggerFactory.getLogger(BaseMobilePage.class);
 
-    protected AppiumDriver<MobileElement> driver;
+    public static AppiumDriver<MobileElement> driver;
     public Waiters waiters;
 
     public BaseMobilePage(AppiumDriver<MobileElement> driver) {
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
         this.driver = driver;
-
+        PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(3)), this);
         waiters = new Waiters(driver);
     }
 

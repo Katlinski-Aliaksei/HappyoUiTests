@@ -54,7 +54,6 @@ public class AppiumServer {
         }
     }
 
-
     public static void Stop() {
         if (server != null) {
             getInstance().stop();

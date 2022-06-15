@@ -1,11 +1,16 @@
 package tests;
 
+import io.qameta.allure.Description;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import utils.ListenerTest;
 
 import static consts.TestData.testAccountPhoneNumber;
 
+@Listeners(ListenerTest.class)
 public class AuthorizationTests extends BaseTest {
+    @Description("Authorization from main screen")
     @Test(groups = {"logIn"})
     public void authorizationFromMainPageTest() {
         mainPage
@@ -17,6 +22,7 @@ public class AuthorizationTests extends BaseTest {
         Assert.assertTrue(mainPage.playButtonIsVisible());
     }
 
+    @Description("Authorization from find screen")
     @Test(groups = {"logIn"})
     public void authorizationFromFindPageTest() {
         mainPage
@@ -35,6 +41,7 @@ public class AuthorizationTests extends BaseTest {
         findPage.clickUnfollowButton();
     }
 
+    @Description("Authorization from add video screen")
     @Test(groups = {"logIn"})
     public void authorizationFromAddVideoPageTest() {
         mainPage
@@ -47,6 +54,7 @@ public class AuthorizationTests extends BaseTest {
         Assert.assertTrue(mainPage.playButtonIsVisible());
     }
 
+    @Description("Authorization from notify screen")
     @Test(groups = {"logIn"})
     public void authorizationFromNotifyPageTest() {
         mainPage
@@ -60,6 +68,7 @@ public class AuthorizationTests extends BaseTest {
         Assert.assertTrue(notifyPage.notificationButtonIsVisible());
     }
 
+    @Description("Authorization from profile screen")
     @Test(groups = {"logIn"})
     public void authorizationFromProfilePageTest() {
         mainPage

@@ -9,8 +9,9 @@
             <package name="tests.RegistrationTests">
                 <include name="Registration">
                     <classes>
-                        <class name="tests.GameCreationTests"/>
                         <class name="tests.InviteToGameTests"/>
+                        <class name="tests.GameCreationTests"/>
+                        <class name="tests.ExportGameTests"/>
                         <class name="tests.RegistrationTests"/>
                         <class name="tests.AuthorizationTests"/>
                     </classes>

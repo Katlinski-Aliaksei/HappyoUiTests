@@ -4,6 +4,7 @@ import base.BaseMobilePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import io.qameta.allure.Step;
 import pages.logIn.SignUpOrLogInPage;
 
 public class FindPage extends BaseMobilePage {
@@ -27,28 +28,33 @@ public class FindPage extends BaseMobilePage {
         super(driver);
     }
 
+    @Step("Choose First Person on Screen")
     public FindPage chooseFirstPerson() {
         element(firstPersonFromList).clickElement();
 
         return this;
     }
 
+    @Step("Click Follow Button")
     public SignUpOrLogInPage clickFollowButton() {
         element(followInsideProfileButton).clickElement();
 
         return new SignUpOrLogInPage(driver);
     }
 
+    @Step("Click UnFollow Button")
     public FindPage clickUnfollowButton() {
         element(unfollowInsideProfileButton).clickElement();
 
         return this;
     }
 
+    @Step("UnFollow Button Visibility Check")
     public boolean unfollowButtonIsDisplayed() {
         return element(unfollowInsideProfileButton).isDisplayed();
     }
 
+    @Step("Choose First Active Game")
     public MainPage choseFirstActiveGame() {
         element(firstActiveGameVideo).clickElement();
 

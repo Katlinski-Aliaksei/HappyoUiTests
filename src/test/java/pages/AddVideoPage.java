@@ -4,6 +4,7 @@ import base.BaseMobilePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import io.qameta.allure.Step;
 import org.openqa.selenium.TimeoutException;
 
 public class AddVideoPage extends BaseMobilePage {
@@ -46,43 +47,49 @@ public class AddVideoPage extends BaseMobilePage {
         super(driver);
     }
 
+    @Step("Click Shot Video Button")
     public AddVideoPage shotVideo() {
         element(shotVideoButton).clickElement();
 
         return this;
     }
 
+    @Step("Click Shit Ten Second Video Button")
     public AddVideoPage shotTenSecVideo() {
         element(shotTenSecondVideoButton).clickElement();
 
         return this;
     }
 
+    @Step("Click Next Button")
     public AddVideoPage clickNextButton() {
         element(nextButton).clickElement();
 
         return this;
     }
 
+    @Step("Setting Title Video")
     public AddVideoPage setTitleVideo(String title) {
         element(titleField).setValue(title);
-        // element(nextButtonAfterTitle).clickElement();
 
         return this;
     }
 
+    @Step("Click Publish Button")
     public AddVideoPage clickPublishButton() {
         element(publishButton).clickElement();
 
         return this;
     }
 
+    @Step("Click Publish Button after recording Ten Second Video")
     public AddVideoPage clickPublishTenSecVideoButton() {
         element(publishTenSecVideoButton).clickElement();
 
         return this;
     }
 
+    @Step("Enter FeedBack and Send")
     public AddVideoPage enterMail(String text) {
         waiters.waitSomeSecond(3);
         try {
@@ -94,12 +101,14 @@ public class AddVideoPage extends BaseMobilePage {
         return this;
     }
 
+    @Step("Click Back Button")
     public AddVideoPage clickBackButton() {
         element(backButton).clickElement();
 
         return this;
     }
 
+    @Step("Click Play Button on Add Video Page")
     public AddVideoPage clickPlayAddVideoButton() {
         element(playAddVideoButton).clickElement();
 

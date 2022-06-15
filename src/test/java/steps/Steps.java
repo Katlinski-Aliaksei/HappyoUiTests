@@ -6,27 +6,24 @@ import io.qameta.allure.Step;
 import pages.AddVideoPage;
 import pages.MainPage;
 import pages.ProfilePage;
-import pages.logIn.SignUpOrLogInPage;
 
 import static consts.TestData.mailText;
 import static consts.TestData.testAccountPhoneNumber;
 
 public class Steps {
     AppiumDriver<MobileElement> driver;
-    private MainPage mainPage;
-    private SignUpOrLogInPage signUpOrLogInPage;
-    private ProfilePage profilePage;
-    private AddVideoPage addVideoPage;
+    private final MainPage mainPage;
+    private final ProfilePage profilePage;
+    private final AddVideoPage addVideoPage;
 
     public Steps(AppiumDriver<MobileElement> driver) {
         this.driver = driver;
         mainPage = new MainPage(driver);
-        signUpOrLogInPage = new SignUpOrLogInPage(driver);
         profilePage = new ProfilePage(driver);
         addVideoPage = new AddVideoPage(driver);
     }
 
-    @Step
+    @Step("LogIn Step")
     public void logIn(String number) {
         mainPage
                 .clickPlayButton()
@@ -37,7 +34,7 @@ public class Steps {
                 .enterMail(mailText);
     }
 
-    @Step
+    @Step("LogOut Step")
     public void logOut() {
         try {
             mainPage
@@ -50,12 +47,22 @@ public class Steps {
         }
     }
 
-    @Step
+    @Step("Remove Completed Video After Checking")
     public void removeCompletedVideo() {
         profilePage
                 .clickVideo()
                 .clickSettingsCompletedVideoButton()
                 .clickDeleteCompetitionButton()
                 .clickBackButton();
+    }
+
+    @Step("Shot Ten Second Video")
+    public void shotTenSecondVideo(){
+        mainPage
+                .clickPlayButton();
+        addVideoPage
+                .shotTenSecVideo()
+                .clickPublishTenSecVideoButton()
+                .enterMail(mailText);
     }
 }

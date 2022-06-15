@@ -1,5 +1,7 @@
 package utils;
 
+import io.qameta.allure.Step;
+
 import java.util.Random;
 
 public class RandomData {
@@ -14,6 +16,7 @@ public class RandomData {
         return String.valueOf(random_number);
     }
 
+    @Step("Generate random name for new User")
     public static String generateRandomName() {
         int leftLimit = 97;
         int rightLimit = 122;

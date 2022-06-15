@@ -1,30 +1,41 @@
 package utils;
 
 import core.AppiumDriverConfig;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.qameta.allure.Allure;
-import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ListenerTest implements ITestListener {
-    @Attachment("Screenshot on failure")
-    private byte[] makeScreenshotOnFailure(String testName) {
-        return ((TakesScreenshot) AppiumDriverConfig.getDriver()).getScreenshotAs(OutputType.BYTES);
-    }
+    AppiumDriver<MobileElement> driver;
 
-    private void takeScreenshot() {
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
-                ((TakesScreenshot) AppiumDriverConfig.getDriver())
-                .getScreenshotAs(OutputType.BYTES));
-        Allure.addAttachment("Screenshot of failed step", byteArrayInputStream);
+    protected void takeScreenshot() throws IOException {
+        driver = AppiumDriverConfig.getDriver();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM hh:mm:ss");
+        Date date = new Date();
+        String fileName = sdf.format(date);
+        try {
+            Allure.addAttachment(fileName, new ByteArrayInputStream(((TakesScreenshot) driver)
+                    .getScreenshotAs(OutputType.BYTES)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        takeScreenshot();
+        try {
+            takeScreenshot();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

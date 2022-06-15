@@ -1,10 +1,12 @@
 package tests;
 
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.RandomData;
 
 public class RegistrationTests extends BaseTest {
+    @Description("Full profile create from Main Page.")
     @Test(groups = {"registration"})
     public void registrationFromMainScreenIosTest() {
         mainPage
@@ -17,6 +19,7 @@ public class RegistrationTests extends BaseTest {
         Assert.assertTrue(mainPage.playButtonIsVisible());
     }
 
+    @Description(" Profile create from AddVideo page.")
     @Test(groups = {"registration"})
     public void registrationFromAddVideoScreenTest() {
         mainPage
@@ -25,6 +28,7 @@ public class RegistrationTests extends BaseTest {
         Assert.assertTrue(signUpOrLogInPage.phoneNumberFieldIsVisible());
     }
 
+    @Description(" Profile create from Notify page.")
     @Test(groups = {"registration"})
     public void registrationFromNotifyPageTest() {
         mainPage
@@ -35,6 +39,7 @@ public class RegistrationTests extends BaseTest {
         Assert.assertTrue(signUpOrLogInPage.phoneNumberFieldIsVisible());
     }
 
+    @Description(" Profile create from Profile page.")
     @Test(groups = {"registration"})
     public void registrationFromProfilePageTest() {
         mainPage
@@ -45,6 +50,7 @@ public class RegistrationTests extends BaseTest {
         Assert.assertTrue(signUpOrLogInPage.phoneNumberFieldIsVisible());
     }
 
+    @Description(" Profile create from find page. Interesting people.")
     @Test(groups = {"registration"})
     public void registrationFromFindPageTest() {
         mainPage

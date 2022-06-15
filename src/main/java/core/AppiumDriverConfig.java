@@ -2,6 +2,7 @@ package core;
 
 import configs.PropertiesConfig;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -13,10 +14,10 @@ import java.net.URL;
 import java.time.Duration;
 
 public class AppiumDriverConfig {
-    static AppiumDriver driver;
+    static AppiumDriver<MobileElement> driver;
     private static final Logger LOGGER = LoggerFactory.getLogger(AppiumDriverConfig.class);
 
-    public static AppiumDriver getDriver() {
+    public static AppiumDriver<MobileElement> getDriver() {
         if (driver == null) {
             try {
                 driver = startAppiumDriver();
@@ -28,7 +29,7 @@ public class AppiumDriverConfig {
         return driver;
     }
 
-    public static AppiumDriver startAppiumDriver() throws MalformedURLException {
+    public static AppiumDriver<MobileElement> startAppiumDriver() throws MalformedURLException {
         LOGGER.info("Start AppiumDriver...");
 
         switch (PropertiesConfig.getProperty("platformName").toUpperCase()) {

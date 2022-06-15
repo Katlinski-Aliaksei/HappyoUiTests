@@ -1,11 +1,13 @@
 package tests;
 
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static consts.TestData.*;
 
 public class GameCreationTests extends BaseTest {
+    @Description("Game creation from other video on Add Video screen")
     @Test(priority = 3)
     public void creationGameFromAddVideoPage() {
         steps
@@ -20,6 +22,7 @@ public class GameCreationTests extends BaseTest {
         Assert.assertTrue(mainPage.playButtonIsVisible());
     }
 
+    @Description("Game creation from other video on feed screen")
     @Test(priority = 1)
     public void creationGameFromMainPage() {
         steps
@@ -39,6 +42,7 @@ public class GameCreationTests extends BaseTest {
         steps.removeCompletedVideo();
     }
 
+    @Description("Game creation from find screen.")
     @Test(priority = 2)
     public void creationGameFromFindPage() {
         steps
