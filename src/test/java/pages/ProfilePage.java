@@ -1,6 +1,7 @@
 package pages;
 
 import base.BaseMobilePage;
+import consts.TestData;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -40,10 +41,17 @@ public class ProfilePage extends BaseMobilePage {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"Done\"]/parent::XCUIElementTypeOther" +
             "/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeOther[1]")
     protected MobileElement arrowButton;
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeOther[@name=\"Play\"])[13]/parent::XCUIElementTypeOther" +
+            "/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeOther[1]")
+    protected MobileElement arrowSecondButton;
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Invitations sent\"`]")
     protected MobileElement textNotification;
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`label == \"Save video\"`]")
     protected MobileElement saveVideoButton;
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`label == \"Report\"`]")
+    protected MobileElement reportButton;
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`label == \"CANCEL\"`][1]/XCUIElementTypeOther[1]")
+    protected MobileElement sendReportButton;
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Save to Files\"`]")
     protected MobileElement saveToFilesButton;
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Сохранить\"`]")
@@ -62,6 +70,16 @@ public class ProfilePage extends BaseMobilePage {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"Done\"]/parent::XCUIElementTypeOther/parent::XCUIElementTypeOther" +
             "/following::XCUIElementTypeOther[1]")
     protected MobileElement backButton;
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeOther[@name=\"Play\"])[12]/parent::XCUIElementTypeOther" +
+            "/parent::XCUIElementTypeOther/parent::XCUIElementTypeOther/parent::XCUIElementTypeOther" +
+            "/following-sibling::XCUIElementTypeOther[1]")
+    protected MobileElement backRandomVideoButton;
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeOther[@name=\"Play\"])[12]/parent::XCUIElementTypeOther" +
+            "/parent::XCUIElementTypeOther/parent::XCUIElementTypeOther/parent::XCUIElementTypeOther" +
+            "/following-sibling::XCUIElementTypeOther[2]")
+    protected MobileElement settingsRandomActiveGameButton;
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeOther[@name=\"Play\"])[12]")
+    protected MobileElement playRandomActiveGameButton;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeNavigationBar[@name=\"UIActivityContentView\"]/XCUIElementTypeOther/child::XCUIElementTypeOther")
     protected MobileElement previewVideoLink;
@@ -77,10 +95,57 @@ public class ProfilePage extends BaseMobilePage {
     protected MobileElement messageBodyField;
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Отменить\"`]")
     protected MobileElement cancelButton;
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`label == \"Thank you The complaint has been sent\"`][3]")
+    protected MobileElement messageAfterReportingForCreatedVideo;
+
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeOther[@name=\"Invite to game\"])[2]/XCUIElementTypeOther[1]")
+    protected MobileElement searchIconButton;
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeOther[@name=\"Search...\"])[3]/XCUIElementTypeTextField")
+    protected MobileElement searchField;
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeOther[@name=\"testaccount2 testaccount2\"])[4]")
+    protected MobileElement testAccountIconButton;
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeOther[@name=\"Invitations sent\"])[1]")
+    protected MobileElement messageAfterInvitation;
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeOther[@name=\"Create ō-chain Share link Invite to game\"])[1]")
+    protected MobileElement closeSmallToolBarButton;
 
 
     public ProfilePage(AppiumDriver<MobileElement> driver) {
         super(driver);
+    }
+
+    @Step("click Search Button")
+    public ProfilePage clickSearchButton() {
+        element(searchIconButton).clickElement();
+
+        return this;
+    }
+
+    @Step("Set account name to Search Field")
+    public ProfilePage setSearchingName(String name) {
+        element(searchField).clickElement();
+        element(searchField).setValue(name);
+
+        return this;
+    }
+
+    @Step("Choose TestAccount2")
+    public ProfilePage chooseTestAccount() {
+        element(testAccountIconButton).clickElement();
+
+        return this;
+    }
+
+    @Step("Message after Invitation Visibility Check")
+    public boolean messageAfterInvitationIsVisible() {
+        return element(textNotification).isDisplayed();
+    }
+
+    @Step("Click close small toolbar button")
+    public ProfilePage clickCloseSmallToolBarButton() {
+        element(closeSmallToolBarButton).clickElement();
+
+        return this;
     }
 
     @Step("Click Settings Profile Button")
@@ -179,7 +244,12 @@ public class ProfilePage extends BaseMobilePage {
     @Step("Click Back Button")
     public ProfilePage clickBackButton() {
         try {
-            element(backButton).clickElement();
+            if (element(backButton).isDisplayed()) {
+                element(backButton).clickElement();
+            }
+            if (element(backRandomVideoButton).isDisplayed()) {
+                element(backRandomVideoButton).clickElement();
+            }
         } catch (Exception e) {
             LOGGER.info("Element isn't visible");
         }
@@ -197,7 +267,11 @@ public class ProfilePage extends BaseMobilePage {
 
     @Step("Click Arrow Button")
     public ProfilePage clickArrowButton() {
-        element(arrowButton).clickElement();
+        if (element(arrowButton).isDisplayed()) {
+            element(arrowButton).clickElement();
+        } else if (element(arrowSecondButton).isDisplayed()) {
+            element(arrowSecondButton).clickElement();
+        }
 
         return this;
     }
@@ -228,11 +302,6 @@ public class ProfilePage extends BaseMobilePage {
         System.out.println(value);
 
         return this;
-    }
-
-    @Step("Notification after Sending Invite To A Game Visibility Checking")
-    public boolean notificationIsVisible() {
-        return element(textNotification).isDisplayed();
     }
 
     @Step("Click Share Button")
@@ -292,5 +361,36 @@ public class ProfilePage extends BaseMobilePage {
         element(confirmSaveButton).clickElement();
 
         return this;
+    }
+
+    @Step("Click Settings Random Active Game Button")
+    public ProfilePage clickSettingsRandomActiveGameButton() {
+        element(settingsRandomActiveGameButton).clickElement();
+
+        return this;
+    }
+
+    @Step("Play Random Active Game Button Visibility Check")
+    public boolean playRandomActiveGameButtonIsVisible() {
+        return element(playRandomActiveGameButton).isDisplayed();
+    }
+
+    @Step("Click Report Button")
+    public ProfilePage clickReportButton() {
+        element(reportButton).clickElement();
+
+        return this;
+    }
+
+    @Step("Send Report for Created Video")
+    public ProfilePage sendReportForCreatedVideo() {
+        element(sendReportButton).clickElement();
+
+        return this;
+    }
+
+    @Step("Message After Reporting Created Video Visibility Check")
+    public boolean messageAfterReportingForCreatedVideoIsVisible() {
+        return element(messageAfterReportingForCreatedVideo).isDisplayed();
     }
 }

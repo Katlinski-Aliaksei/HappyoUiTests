@@ -101,4 +101,21 @@ public class ExportGameTests extends BaseTest {
                 .clickCancelButton()
                 .clickCloseToolWindow();
     }
+
+    @Description("Save Random Video Test")
+    @Test
+    public void saveRandomVideoTest() {
+        steps
+                .logIn(testAccountPhoneNumber);
+        mainPage
+                .openFindPage()
+                .choseFirstActiveGame();
+        profilePage
+                .clickSettingsRandomActiveGameButton()
+                .clickSaveVideoButton()
+                .clickSaveToFilesButton()
+                .clickConfirmSaveButton();
+
+        Assert.assertTrue(profilePage.playRandomActiveGameButtonIsVisible());
+    }
 }

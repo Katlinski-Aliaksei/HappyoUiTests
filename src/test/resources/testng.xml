@@ -14,6 +14,7 @@
                         <class name="tests.ExportGameTests"/>
                         <class name="tests.RegistrationTests"/>
                         <class name="tests.AuthorizationTests"/>
+                        <class name="tests.ComplaintsTests"/>
                     </classes>
                 </include>
             </package>

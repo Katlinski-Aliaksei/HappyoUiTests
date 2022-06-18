@@ -2,7 +2,9 @@ package consts;
 
 public class TestData {
     public static final String testAccountPhoneNumber = "3311111111";
+    public static final String testAccountSecondPhoneNumber="3311111122";
     public static final String testAccountName = "testaccount";
+    public static final String testAccountSecondName = "testaccount2";
     public static final String titleVideo = "AUTOTEST";
     public static final String mailText = "HappyO is Great";
 

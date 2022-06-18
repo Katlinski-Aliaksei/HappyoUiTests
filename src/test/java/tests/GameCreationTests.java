@@ -2,10 +2,13 @@ package tests;
 
 import io.qameta.allure.Description;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import utils.ListenerTest;
 
 import static consts.TestData.*;
 
+@Listeners(ListenerTest.class)
 public class GameCreationTests extends BaseTest {
     @Description("Game creation from other video on Add Video screen")
     @Test(priority = 3)

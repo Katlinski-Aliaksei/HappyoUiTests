@@ -2,9 +2,12 @@ package tests;
 
 import io.qameta.allure.Description;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import utils.ListenerTest;
 import utils.RandomData;
 
+@Listeners(ListenerTest.class)
 public class RegistrationTests extends BaseTest {
     @Description("Full profile create from Main Page.")
     @Test(groups = {"registration"})

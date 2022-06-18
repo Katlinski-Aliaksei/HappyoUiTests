@@ -19,8 +19,10 @@ public class MainPage extends BaseMobilePage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"tab-profile tab-profile\"`]")
     protected MobileElement profilePageButton;
 
-    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeOther[@name=\"Play\"])[2]")
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeOther[@name=\"Play\"])[1]")
     protected MobileElement playButton;
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeOther[@name=\"Play\"])[8]")
+    protected MobileElement playInInviteButton;
     @iOSXCUITFindBy(xpath = "(//XCUIElementTypeOther[@name=\"Play\"])[1]/parent::XCUIElementTypeOther" +
             "/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeOther[1]")
     protected MobileElement arrowButton;
@@ -31,7 +33,12 @@ public class MainPage extends BaseMobilePage {
 
     @Step("Click Play Button")
     public SignUpOrLogInPage clickPlayButton() {
-        element(playButton).clickElement();
+        if (element(playButton).isDisplayed()) {
+            element(playButton).clickElement();
+        }
+        if (element(playInInviteButton).isDisplayed()) {
+            element(playInInviteButton).clickElement();
+        }
 
         return new SignUpOrLogInPage(driver);
     }

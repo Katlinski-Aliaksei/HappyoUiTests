@@ -7,8 +7,7 @@ import pages.AddVideoPage;
 import pages.MainPage;
 import pages.ProfilePage;
 
-import static consts.TestData.mailText;
-import static consts.TestData.testAccountPhoneNumber;
+import static consts.TestData.*;
 
 public class Steps {
     AppiumDriver<MobileElement> driver;
@@ -24,19 +23,24 @@ public class Steps {
     }
 
     @Step("LogIn Step")
-    public void logIn(String number) {
+    public Steps logIn(String number) {
         mainPage
+                .openMainPage()
                 .clickPlayButton()
                 .setPhoneNumber(number)
                 .clickLogInButton()
                 .setSmsCode();
         addVideoPage
                 .enterMail(mailText);
+
+        return this;
     }
 
     @Step("LogOut Step")
     public void logOut() {
         try {
+            profilePage
+                    .clickBackButton();
             mainPage
                     .openProfilePage()
                     .openProfileSettings()
@@ -57,12 +61,22 @@ public class Steps {
     }
 
     @Step("Shot Ten Second Video")
-    public void shotTenSecondVideo(){
+    public void shotTenSecondVideo() {
         mainPage
                 .clickPlayButton();
         addVideoPage
                 .shotTenSecVideo()
                 .clickPublishTenSecVideoButton()
                 .enterMail(mailText);
+    }
+
+    @Step("Shot Video From AddVideo Page")
+    public void shotVideoFromAddVideoPage() {
+        mainPage
+                .openAddVideoPage()
+                .shotVideo()
+                .clickNextButton()
+                .setTitleVideo(titleVideo)
+                .clickPublishButton();
     }
 }
