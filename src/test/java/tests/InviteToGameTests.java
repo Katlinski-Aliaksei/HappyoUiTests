@@ -25,6 +25,8 @@ public class InviteToGameTests extends BaseTest {
                 .clickConfirmButton();
 
         Assert.assertTrue(profilePage.messageAfterInvitationIsVisible());
+
+        profilePage.clickCloseSmallToolBarButton();
     }
 
     @Description("Send invite to a game from \"Created\" tab with other route.")

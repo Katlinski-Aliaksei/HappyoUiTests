@@ -10,7 +10,7 @@ import static consts.TestData.testAccountPhoneNumber;
 
 @Listeners(ListenerTest.class)
 public class ExportGameTests extends BaseTest {
-    @Test
+    @Test(priority = 1)
     public void shareCompletedGameTest() {
         steps
                 .logIn(testAccountPhoneNumber);
@@ -39,7 +39,7 @@ public class ExportGameTests extends BaseTest {
     }
 
     @Description("Share Link Created Game Test")
-    @Test
+    @Test(priority = 2)
     public void shareCreatedGameTest() {
         steps
                 .logIn(testAccountPhoneNumber);
@@ -64,7 +64,7 @@ public class ExportGameTests extends BaseTest {
     }
 
     @Description("Save Created Game To Files Test")
-    @Test
+    @Test(priority = 4)
     public void saveCreatedGameToFilesTest() {
         steps
                 .logIn(testAccountPhoneNumber);
@@ -81,7 +81,7 @@ public class ExportGameTests extends BaseTest {
     }
 
     @Description("Share Link Random Video Test")
-    @Test
+    @Test(priority = 3)
     public void shareLinkRandomVideoTest() {
         steps
                 .logIn(testAccountPhoneNumber);
@@ -103,7 +103,7 @@ public class ExportGameTests extends BaseTest {
     }
 
     @Description("Save Random Video Test")
-    @Test
+    @Test(priority = 5)
     public void saveRandomVideoTest() {
         steps
                 .logIn(testAccountPhoneNumber);

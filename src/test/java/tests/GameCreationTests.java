@@ -11,7 +11,7 @@ import static consts.TestData.*;
 @Listeners(ListenerTest.class)
 public class GameCreationTests extends BaseTest {
     @Description("Game creation from other video on Add Video screen")
-    @Test(priority = 3)
+    @Test(priority = 1)
     public void creationGameFromAddVideoPage() {
         steps
                 .logIn(testAccountPhoneNumber);
@@ -26,7 +26,7 @@ public class GameCreationTests extends BaseTest {
     }
 
     @Description("Game creation from other video on feed screen")
-    @Test(priority = 1)
+    @Test(priority = 3)
     public void creationGameFromMainPage() {
         steps
                 .logIn(testAccountPhoneNumber);

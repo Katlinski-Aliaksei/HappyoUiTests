@@ -37,6 +37,7 @@ public class BaseTest {
 
     @AfterMethod(alwaysRun = true)
     public void logOut() {
+        addVideoPage.closeVideoScreen();
         profilePage.clickBackButton();
         steps.logOut();
         AppiumDriverConfig.closeApp();

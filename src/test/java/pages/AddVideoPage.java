@@ -29,11 +29,13 @@ public class AddVideoPage extends BaseMobilePage {
             "Horizontal scroll bar, 1 page\"`][8]/XCUIElementTypeOther[2]/XCUIElementTypeOther")
     protected MobileElement nextButtonAfterTitle;
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`value == \"Enter your mail\"`]")
-    //@iOSXCUITFindBy(xpath = "(//XCUIElementTypeOther[@name=\"We’re doing our best to deliver the best user experience. Please, leave your email and we’ll reach you to gather your feedback.\"])[3]/XCUIElementTypeOther[2]")
     protected MobileElement inputMailField;
     @iOSXCUITFindBy(xpath = "(//XCUIElementTypeOther[@name=\"We’re doing our best to deliver the best user experience. Please, leave your email and we’ll reach you to gather your feedback.\"])[3]/XCUIElementTypeOther[3]")
     protected MobileElement sendMailButton;
-
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`label == \"CREATE GAME\"`][14]/XCUIElementTypeOther[2]")
+    protected MobileElement closeCreateVideoButton;
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`label == \"FILM 10 SEC VIDEO\"`][9]/XCUIElementTypeOther[2]")
+    protected MobileElement closeTenSecondVideoButton;
 
     //TODO refactoring PUBLISH locator
     @iOSXCUITFindBy(xpath = "(//XCUIElementTypeOther[@name=\"publish-button\"])[2]")
@@ -112,6 +114,17 @@ public class AddVideoPage extends BaseMobilePage {
     public AddVideoPage clickPlayAddVideoButton() {
         element(playAddVideoButton).clickElement();
 
+        return this;
+    }
+
+    @Step("Click Close Button on Screen for Shot Video")
+    public AddVideoPage closeVideoScreen() {
+        if (element(closeCreateVideoButton).isDisplayed()) {
+            element(closeCreateVideoButton).clickElement();
+        }
+        if ((element(closeTenSecondVideoButton).isDisplayed())) {
+            element(closeTenSecondVideoButton).clickElement();
+        }
         return this;
     }
 }
